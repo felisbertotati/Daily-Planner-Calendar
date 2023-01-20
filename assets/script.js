@@ -1,6 +1,6 @@
 // Display the current day at the top of the calendar when a user opens the planner.
 var currentDayEl = moment();
-$("#currentDay").text(currentDayEl.format("dddd,  MMMM Do"));
+$("#currentDay").text(currentDayEl.format("dddd,  MMMM Do, YYYY"));
 
 // Present timeblocks for standard business hours when the user scrolls down.
 var businessHours = {
@@ -12,31 +12,37 @@ function timeblocks() {
     var containerEl = $("<div>");
 
     //added rows
-    containerEl.addClass("row border border-secondary sm-4 ");
+    containerEl.addClass("row d-flex justify-content-center");
 
     //append containerE1 to main container thats on the htm;
     $(".container").append(containerEl);
+
     //add dynamically class div
     var timeblocksEl = $("<div>");
     var textEntry = $("<div>");
-    var button = $("<div>");
+    var save = $("<div>");
+    var saveButton = $(
+      `<button type="submit" class="saveBtn"><i class="fas fa-save" ></i></button>`
+    );
 
     timeblocksEl.text(businessHours[i]);
     //console.log(timeblocksEl);
 
-    //added columns
+    //added columns timeblock it is the time column, I use moment so that user see hour and if it is AM/PM
     timeblocksEl
       .addClass(
-        "col time-block  description boder border-secondary bg-warning "
+        "col-1  time-block  description d-flex align-itens-center justify-content-center pt-4 border border-secondary "
       )
       .text(moment(i, "h").format("h A"));
-    textEntry.addClass("col-6 bg-primary ");
-    button.addClass("col bg-danger");
+    //middle column, where user will type
+    textEntry.addClass("col-8 bg-primary ");
+    //column save button
+    save.addClass("col-1 d-flex justify-content-center align-content-center  ");
 
     containerEl.append(timeblocksEl);
     containerEl.append(textEntry);
-    containerEl.append(button);
-    //append timeblocksE1 to containerE1
+    containerEl.append(save);
+    save.append(saveButton);
   }
 }
 // Color-code each timeblock based on past, present, and future when the timeblock is viewed.
