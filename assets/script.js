@@ -29,11 +29,11 @@ function timeblocks() {
     //added columns timeblock it is the time column, I use moment so that user see hour and if it is AM/PM
     timeblocksEl
       .addClass(
-        "col-1  time-block  description d-flex align-itens-center justify-content-center pt-4 border border-secondary btn-save "
+        "col-1 hour d-flex align-itens-center justify-content-center pt-4 "
       )
       .text(moment(i, "h").format("h A"));
     //middle column, where user will type
-    textEntry.addClass("col-8 bg-primary ");
+    textEntry.addClass("col-8 border border-secondary ");
     //column save button
     save.addClass(
       "col-3 col-sm-1 col-md-1 col-xl-1 pl-0 saveBtn d-flex align-itens-center justify-content-center pt-4"
@@ -47,6 +47,8 @@ function timeblocks() {
 }
 // Color-code each timeblock based on past, present, and future when the timeblock is viewed.
 function taskTimeclock() {
+  var currentHour = moment().hour();
+
   // Allow a user to enter an event when they click a timeblock.
 }
 // Save the event in local storage when the save button is clicked in that timeblock.
