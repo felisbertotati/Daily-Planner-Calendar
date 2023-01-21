@@ -21,9 +21,7 @@ function timeblocks() {
     var timeblocksEl = $("<div>");
     var textEntry = $("<div>");
     var save = $("<div>");
-    var saveButton = $(
-      `<button type="submit" class="saveBtn"><i class="fas fa-save" ></i></button>`
-    );
+    var saveButton = $(`<i class="fas fa-save" ></i>`);
 
     timeblocksEl.text(businessHours[i]);
     //console.log(timeblocksEl);
@@ -31,13 +29,15 @@ function timeblocks() {
     //added columns timeblock it is the time column, I use moment so that user see hour and if it is AM/PM
     timeblocksEl
       .addClass(
-        "col-1  time-block  description d-flex align-itens-center justify-content-center pt-4 border border-secondary "
+        "col-1  time-block  description d-flex align-itens-center justify-content-center pt-4 border border-secondary btn-save "
       )
       .text(moment(i, "h").format("h A"));
     //middle column, where user will type
     textEntry.addClass("col-8 bg-primary ");
     //column save button
-    save.addClass("col-1 d-flex justify-content-center align-content-center  ");
+    save.addClass(
+      "col-3 col-sm-1 col-md-1 col-xl-1 pl-0 saveBtn d-flex align-itens-center justify-content-center pt-4"
+    );
 
     containerEl.append(timeblocksEl);
     containerEl.append(textEntry);
