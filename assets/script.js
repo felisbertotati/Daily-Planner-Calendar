@@ -5,7 +5,7 @@ $("#currentDay").text(currentDayEl.format("dddd,  MMMM Do, YYYY"));
 // Present timeblocks for standard business hours when the user scrolls down.
 var businessHours = {
   start: 9,
-  finish: 17,
+  finish: 20,
 };
 function timeblocks() {
   for (var time = businessHours.start; time <= businessHours.finish; time++) {
@@ -22,11 +22,16 @@ function timeblocks() {
 
     //add dynamically class div
     var taskBlock = $("<div>");
-    var textEntry = $("<div>");
+
+    // Allow a user to enter an event when they click a timeblock.
+    var textEntry = $("<textarea>");
     var save = $("<div>");
     var saveButton = $(`<i class="fas fa-save" ></i>`);
 
+    saveButton.on("click", saveEvent);
+
     taskBlock.text(businessHours[time]);
+
     //console.log(timeblocksEl);
 
     //added columns timeblock it is the time column, I use moment so that user see hour and if it is AM/PM
@@ -70,12 +75,13 @@ function taskTimeTask() {
     }
   });
 }
-
-// Allow a user to enter an event when they click a timeblock.
-function clickEvent() {}
-
 // Save the event in local storage when the save button is clicked in that timeblock.
-function saveEvent() {}
+function saveEvent(event) {
+  //this function I will get the textEntery attributte so with that user can save is daily tasks
+  var taskEl = $(event.target).parent().parent().children().eq(1).val();
+  // in this one I will get the time
+  var hourEl = $(event.target).parent().parent().attr("data-hour");
+}
 // Persist events between refreshes of a page.
 function PersistEvent() {}
 
