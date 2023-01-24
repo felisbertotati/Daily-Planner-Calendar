@@ -8,16 +8,16 @@ var businessHours = {
   finish: 17,
 };
 
-//local message event. when user press the save button it will show that it was save in the localstorage.
-$("#alert").text("Your event was saved in the local storage.");
-
-$("#alert").addClass(" text-center pb-4");
-$("#alert").hide();
-
 // var local storage
 let saveEventEl = JSON.parse(localStorage.getItem("saveEventEl")) || [];
 
 function timeblocks() {
+  //local message event. when user press the save button it will show that it was save in the localstorage.
+  $("#alert").text("Your event was saved in the local storage.");
+
+  $("#alert").addClass(" text-center pb-4");
+  $("#alert").hide();
+
   for (var time = businessHours.start; time <= businessHours.finish; time++) {
     var containerEl = $("<div>");
 
@@ -122,6 +122,6 @@ function saveEvent(event) {
     $("#alert").fadeOut();
   }, 3000);
 }
-
+//call functions
 timeblocks();
 taskTimeTask();
