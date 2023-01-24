@@ -5,8 +5,13 @@ $("#currentDay").text(currentDayEl.format("dddd,  MMMM Do, YYYY"));
 // Present timeblocks for standard business hours when the user scrolls down.
 var businessHours = {
   start: 9,
-  finish: 20,
+  finish: 17,
 };
+
+//var local storage
+
+let saveEventEl = JSON.parse(localStorage.getItem("saveEventEl")) || [];
+
 function timeblocks() {
   for (var time = businessHours.start; time <= businessHours.finish; time++) {
     var containerEl = $("<div>");
@@ -51,6 +56,17 @@ function timeblocks() {
     containerEl.append(textEntry);
     containerEl.append(save);
     save.append(saveButton);
+
+    //save text and hour in local storage
+    var localsEl = JSON.parse(localStorage.getItem("saveEventEl")) || [];
+
+    for (var i = 0; i < localsEl.length; i++) {
+      if (time == localsEl[i].hour) {
+        textEntry.text(localsEl[i].task);
+      } else {
+        textEntry.innerHTML = "";
+      }
+    }
   }
 }
 // Color-code each timeblock based on past, present, and future when the timeblock is viewed.
@@ -81,9 +97,20 @@ function saveEvent(event) {
   var taskEl = $(event.target).parent().parent().children().eq(1).val();
   // in this one I will get the time
   var hourEl = $(event.target).parent().parent().attr("data-hour");
+
+  //object of task and hour
+  var e = {
+    task: taskEl,
+    hour: hourEl,
+  };
+
+  //push my object
+  saveEventEl.push(e);
+
+  //after i can add in the local storage
+
+  localStorage.setItem("saveEventEl", JSON.stringify(saveEventEl));
 }
-// Persist events between refreshes of a page.
-function PersistEvent() {}
 
 timeblocks();
 taskTimeTask();
